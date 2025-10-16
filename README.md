@@ -1,0 +1,1 @@
+# auto-remove-cluster-resources
