@@ -10,10 +10,16 @@ import (
 	"k8s.io/client-go/util/homedir"
 )
 
-// ClientManager holds the Kubernetes Clientset and methods to interact with the cluster.
-// This struct is accessible by all files in the 'k8s' package.
+// Kubernetes Clientset and methods to interact with the cluster.
 type ClientManager struct {
 	Clientset *kubernetes.Clientset
+}
+
+// allowed k8s resources to modify or monitor . global var to set new permissions/variables
+type AllowedResourcesMap map[string][]string 
+var clusterResources = AllowedResourcesMap{
+    "default":    {"pods", "deployments"},
+    "staging":    {"pods", "deployments", "ingress"},
 }
 
 // NewClientManager initializes the Clientset and returns a pointer to the ClientManager struct.
